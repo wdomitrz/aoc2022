@@ -1012,3 +1012,6 @@ d = list(
 
 p1_res = sum(list(map(lambda x: x[0][1] >= x[1][1] or x[0][0] == x[1][0], d)))
 print(p1_res)
+
+p2_res = sum(list(map(lambda x: x[0][1] >= x[1][0], d)))
+print(p2_res)
