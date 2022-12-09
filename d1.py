@@ -2269,5 +2269,3 @@ p1_sol = max(list(map(sum, d)))
 print(p1_sol)
 p2_sol = sum(sorted(list(map(sum, d)))[-3:])
 print(p2_sol)
-
-# %%

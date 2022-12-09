@@ -326,5 +326,3 @@ p2_res = sum(
     )
 )
 print(p2_res)
-
-# %%
