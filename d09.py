@@ -2029,11 +2029,11 @@ pos_1 = [np.array((0, 0)) for _ in range(2)]
 pos_2 = [np.array((0, 0)) for _ in range(10)]
 
 
-def simulate(pos, d=d):
+def simulate(pos):
     tail_positions = []
-    for dir, count in d:
+    for direction, count in d:
         for _ in range(int(count)):
-            pos[0] += moves_map[dir]
+            pos[0] += moves_map[direction]
             for i in range(len(pos) - 1):
                 pos[i + 1] = tail_move(pos[i], pos[i + 1])
 

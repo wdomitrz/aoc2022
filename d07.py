@@ -1094,40 +1094,40 @@ $ ls
 )
 
 
-dir = []
+dir_sizes = {}
+
+
+def get_dir_sizes(directory_path):
+    if directory_path in dir_sizes:
+        return dir_sizes[directory_path]
+    dir_sizes[directory_path] = sum(map(lambda x: x[0], contents_files[directory_path]))
+    for subdir in contents_directories[directory_path]:
+        dir_sizes[directory_path] += get_dir_sizes(subdir)
+    return dir_sizes[directory_path]
+
+
+directory = []
 contents_files = {}
 contents_directories = {}
 for cmd_res in d:
     cmd = tuple(cmd_res[0])
     res = cmd_res[1:]
     if cmd == ("cd", "/"):
-        dir = ["/"]
+        directory = ["/"]
     elif cmd == ("cd", ".."):
-        dir = dir[:-1]
+        directory = directory[:-1]
     elif cmd[0] == "cd":
-        dir.append(cmd[1])
+        directory.append(cmd[1])
     elif cmd == ("ls",):
-        contents_directories[tuple(dir)] = []
-        contents_files[tuple(dir)] = []
+        contents_directories[tuple(directory)] = []
+        contents_files[tuple(directory)] = []
         for size_or_dir, name in res:
             if size_or_dir.isdigit():
-                contents_files[tuple(dir)].append((int(size_or_dir), name))
+                contents_files[tuple(directory)].append((int(size_or_dir), name))
             else:
-                contents_directories[tuple(dir)].append(tuple(dir + [name]))
+                contents_directories[tuple(directory)].append(tuple(directory + [name]))
     else:
         pass  # Or maybe error
-
-dir_sizes = {}
-
-
-def get_dir_sizes(dir):
-    if dir in dir_sizes:
-        return dir_sizes[dir]
-    dir_sizes[dir] = sum(map(lambda x: x[0], contents_files[dir]))
-    for subdir in contents_directories[dir]:
-        dir_sizes[dir] += get_dir_sizes(subdir)
-    return dir_sizes[dir]
-
 
 get_dir_sizes(("/",))
 

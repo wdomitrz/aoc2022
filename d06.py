@@ -5,7 +5,7 @@ MARKER_LEN_1 = 4
 MARKER_LEN_2 = 14
 
 
-def find_marker_pos(marker_len, d=d):
+def find_marker_pos(marker_len):
     for i in range(len(d) - marker_len + 1):
         if len(set(d[i : i + marker_len])) == marker_len:
             return i + marker_len
