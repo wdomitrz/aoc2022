@@ -120,8 +120,9 @@ p1_res = lens[p1_h]
 print(p1_res)
 
 moves_nedded = 1
-while (moves[burnout + moves_nedded] - moves[burnout]) % len(d) != 0:
+while (moves[burnout + moves_nedded] - moves[burnout]) % (len(d) * len(rocks)) != 0:
     moves_nedded += 1
+
 
 addon = (p2_h - burnout) % moves_nedded
 p2_res = lens[burnout + addon] + (
